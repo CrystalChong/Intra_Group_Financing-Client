@@ -1,8 +1,9 @@
-<title>Intragroup Financing Health Check — Your Documents</title>
+<title>Client Intake Questionnaire — Intra-Group Financing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Lato:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root{
+  /* YYC Advisors brand tokens — single light theme to match yycadvisors.com */
   --paper:#FFFFFF;
   --ink:#102127;
   --muted:#42565E;
@@ -14,6 +15,9 @@
   --sky-soft:#E8F6FC;
   --line:#E7EDEF;
   --gold:#D6B25E;
+  --warn-bg:#F8F1DF;
+  --risk:#AF3A3A;
+  --risk-bg:#F9E9E9;
 }
 *{box-sizing:border-box}
 html,body{margin:0}
@@ -22,76 +26,443 @@ body{
   color:var(--ink);
   font-family:"Lato",system-ui,-apple-system,"Segoe UI",sans-serif;
   font-size:13px;line-height:1.45;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
 }
-.page{max-width:720px;margin:24px auto;padding:0 0 26px}
-.hero{
-  background:var(--grad-navy);padding:26px 28px 22px;color:#fff;
-  border-radius:14px;box-shadow:0 14px 34px rgba(15,76,92,.12);
+.page{
+  background:var(--paper);
+  max-width:820px;margin:24px auto;padding:0 0 26px;
+  box-shadow:0 14px 34px rgba(15,76,92,.12);
+  border-radius:14px;overflow:hidden;
 }
+/* header */
+.hero{background:var(--grad-navy);padding:20px 28px 18px;color:#fff}
 .hero .badge{
   display:inline-block;font-family:"Poppins",sans-serif;font-weight:600;font-size:10px;
   letter-spacing:.1em;text-transform:uppercase;color:var(--navy-deep);
   background:var(--gold);padding:3px 11px;border-radius:100px;margin-bottom:8px;
 }
-.hero h1{font-family:"Poppins",sans-serif;font-weight:700;font-size:21px;margin:0 0 6px;line-height:1.25}
-.hero p{margin:0;font-size:12px;color:rgba(255,255,255,.82);max-width:60ch}
+.hero h1{font-family:"Poppins",sans-serif;font-weight:700;font-size:21px;margin:0 0 4px;line-height:1.2}
+.hero p{margin:0;font-size:11.5px;color:rgba(255,255,255,.8)}
+.hero .ref{font-family:"IBM Plex Mono",monospace;color:#16C0E8;font-size:10.5px}
 
-.cards{display:flex;flex-direction:column;gap:10px;margin-top:16px}
-.card{
-  background:var(--paper);border:1px solid var(--line);border-radius:14px;
-  padding:14px 16px;display:flex;gap:14px;align-items:flex-start;
-  box-shadow:0 1px 3px rgba(0,0,0,.04);text-decoration:none;color:inherit;
-  transition:border-color .12s ease, box-shadow .12s ease;
+/* case details */
+.meta{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px 18px;
+  padding:14px 28px 4px;
 }
-.card:hover{border-color:var(--sky);box-shadow:0 6px 18px rgba(15,76,92,.1)}
-.icon{
-  font-size:18px;width:34px;height:34px;border-radius:50%;background:var(--sky-soft);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+.meta label{display:block;font-family:"Poppins",sans-serif;font-weight:600;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin-bottom:1px}
+.meta input{
+  width:100%;border:0;border-bottom:1px solid var(--line);padding:3px 1px;
+  font-family:"Lato",sans-serif;font-size:12.5px;color:var(--ink);background:transparent;outline:none;
 }
-.card .body{flex:1}
-.card h2{font-family:"Poppins",sans-serif;font-weight:600;font-size:14px;margin:0 0 2px;color:var(--navy)}
-.card p{margin:0;font-size:11.5px;color:var(--muted)}
+.meta input:focus{border-bottom-color:var(--sky)}
+.meta .full{grid-column:1/-1}
 
-.footnote{margin:18px 4px 0;font-size:10.5px;color:var(--soft)}
+/* instructions */
+.howto{
+  margin:12px 28px 10px;padding:8px 12px;border-radius:10px;
+  background:var(--sky-soft);border:1px solid #CBE9F7;font-size:11.5px;color:var(--muted);
+}
+.howto strong{color:var(--navy)}
+
+/* progress */
+.progwrap{margin:0 28px 12px;display:flex;align-items:center;gap:10px}
+.progbar{flex:1;height:8px;border-radius:100px;background:var(--line);overflow:hidden}
+.progbar .fill{height:100%;background:var(--sky);width:0%;transition:width .2s ease}
+.proglbl{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--soft);white-space:nowrap}
+
+.sectionhd{
+  margin:16px 28px 8px;font-family:"Poppins",sans-serif;font-weight:700;font-size:11px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--navy);
+  display:flex;align-items:center;gap:8px;
+}
+.sectionhd::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* top-level (lender) question units */
+.qlist{padding:0 28px;display:flex;flex-direction:column;gap:10px}
+.qunit{border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.qunit .qhead{display:flex;gap:8px;align-items:baseline;margin-bottom:4px;flex-wrap:wrap}
+.esstag{
+  font-family:"Poppins",sans-serif;font-weight:700;font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--gold);color:var(--navy-deep);padding:2px 7px;border-radius:100px;
+}
+.subq .slabel{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.qunit .qno{
+  font-family:"Poppins",sans-serif;font-weight:700;font-size:12px;color:#fff;
+  background:var(--navy);width:20px;height:20px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.qunit .qtitle{font-family:"Poppins",sans-serif;font-weight:600;font-size:12.5px;color:var(--navy)}
+.qunit .qdesc{font-size:10.5px;color:var(--soft);margin:0 0 8px 28px}
+.qunit .qbody{margin-left:28px;display:flex;flex-direction:column;gap:6px}
+
+.field input[type=text]{
+  width:100%;border:1px solid var(--line);border-radius:8px;padding:6px 9px;
+  font-family:"Lato",sans-serif;font-size:12px;color:var(--ink);background:#FBFCFD;outline:none;
+}
+.field input[type=text]:focus{border-color:var(--sky);background:#fff}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.choices{display:flex;flex-wrap:wrap;gap:6px}
+.choices label{
+  display:inline-flex;align-items:center;gap:5px;cursor:pointer;border:1px solid var(--line);
+  border-radius:100px;padding:4px 11px 4px 9px;font-size:11px;color:var(--muted);
+  transition:all .12s ease;
+}
+.choices input{accent-color:var(--navy);width:11px;height:11px;margin:0}
+.choices label:has(input:checked){background:var(--sky-soft);border-color:var(--sky);color:var(--navy);font-weight:700}
+.choices label:hover{border-color:var(--sky)}
+.checks label{
+  display:flex;align-items:center;gap:6px;cursor:pointer;font-size:11px;color:var(--muted);
+}
+.checks input{accent-color:var(--navy);width:12px;height:12px;margin:0}
+.subnote{font-size:10px;color:var(--soft);margin-top:2px}
+
+
+/* borrower & loan blocks */
+.bwrap{padding:0 28px;display:flex;flex-direction:column;gap:12px}
+.bcard{border:1.5px solid var(--sky);border-radius:14px;padding:14px 16px;background:#FBFEFF}
+.bhead{display:flex;align-items:center;gap:10px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.bnum{
+  font-family:"Poppins",sans-serif;font-weight:700;font-size:11px;color:#fff;
+  background:var(--sky);width:22px;height:22px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.bhead .blabel{font-family:"Poppins",sans-serif;font-weight:600;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft)}
+.bname{
+  flex:1;border:0;border-bottom:1px solid var(--line);padding:4px 2px;
+  font-family:"Poppins",sans-serif;font-weight:600;font-size:12.5px;color:var(--navy);background:transparent;outline:none;
+}
+.bname:focus{border-bottom-color:var(--sky)}
+.bname::placeholder{color:var(--soft);font-weight:400}
+.removeBtn{
+  font-family:"Poppins",sans-serif;font-weight:600;font-size:10.5px;cursor:pointer;
+  border-radius:100px;padding:4px 12px;border:1px solid var(--risk);background:#fff;color:var(--risk);
+}
+.removeBtn:disabled{opacity:.35;cursor:not-allowed}
+
+.subq{padding:8px 0;border-top:1px dashed var(--line)}
+.subq:first-of-type{border-top:0;padding-top:0}
+.subq .slabel{font-family:"Poppins",sans-serif;font-weight:600;font-size:11px;color:var(--navy);margin-bottom:2px}
+.subq .sltr{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--sky);margin-right:4px}
+.subq .sdesc{font-size:9.5px;line-height:1.35;color:var(--soft);margin:0 0 6px}
+.subq .qbody{margin-left:0}
+
+details.moredetail{margin-top:4px}
+details.moredetail summary{
+  cursor:pointer;font-family:"Poppins",sans-serif;font-weight:600;font-size:10.5px;
+  color:var(--sky);list-style:none;padding:6px 0;border-top:1px dashed var(--line);
+}
+details.moredetail summary::before{content:"+ "}
+details.moredetail[open] summary::before{content:"– "}
+details.moredetail summary:focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+details.moredetail > .qunit,details.moredetail > .subq{margin-top:8px}
+details.moredetail > .subq:first-of-type{border-top:1px dashed var(--line);padding-top:8px}
+
+.addBtn{
+  align-self:flex-start;font-family:"Poppins",sans-serif;font-weight:600;font-size:11.5px;cursor:pointer;
+  border-radius:100px;padding:7px 16px;border:1.5px dashed var(--sky);background:var(--sky-soft);color:var(--navy);
+}
+
+/* footer */
+.note{margin:14px 28px 0;font-size:10px;color:var(--soft)}
+.note .ref{font-family:"IBM Plex Mono",monospace;font-size:9.5px}
+.nextsteps{margin:12px 28px 0;padding:10px 14px;border-radius:10px;background:var(--warn-bg);border:1px solid var(--gold);font-size:11px;color:#8F702B}
+.nextsteps strong{font-family:"Poppins",sans-serif;color:var(--navy)}
+.nextsteps ol{margin:6px 0 0;padding-left:18px}
+.nextsteps li{margin-bottom:2px}
+.nextsteps a{color:var(--navy);font-weight:700;text-decoration:none;border-bottom:1px solid var(--gold)}
+.nextsteps a:hover{color:var(--sky)}
+.signrow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin:18px 28px 0}
+.sign{border-top:1px solid var(--ink);padding-top:3px;font-family:"Poppins",sans-serif;font-weight:600;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
+.toolbar{display:flex;gap:10px;justify-content:flex-end;margin:14px 28px 0}
+.btn{
+  font-family:"Poppins",sans-serif;font-weight:600;font-size:12px;cursor:pointer;
+  border-radius:100px;padding:7px 18px;border:1px solid var(--navy);
+}
+.btn.primary{background:var(--navy);color:#fff}
+.btn.ghost{background:#fff;color:var(--navy)}
+.btn:focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+
+@media (max-width:640px){
+  .meta{grid-template-columns:1fr 1fr}
+  .field-row{grid-template-columns:1fr}
+}
+@media print{
+  @page{size:A4;margin:9mm}
+  body{background:#fff;font-size:11.5px}
+  .qdesc,.sdesc{font-size:9px}
+  .page{box-shadow:none;margin:0;max-width:none;border-radius:0;padding-bottom:0}
+  .toolbar,.progwrap,.addBtn,.removeBtn,details.qref,input[type=file]{display:none}
+  .qunit{break-inside:avoid;padding:8px 12px}
+  .bcard{break-inside:avoid;padding:10px 12px}
+  .hero{padding:14px 24px 12px}
+}
 </style>
 
 <div class="page">
   <div class="hero">
-    <span class="badge">YYC Tax Advisory</span>
-    <h1>Intragroup Financing Health Check</h1>
-    <p>Your documents for the upcoming session — open a link below, no download or sign-in required.</p>
+    <span class="badge">YYC Tax Advisory</span> <span class="badge" style="background:#1CACE1;color:#08303B">Client Intake</span>
+    <h1>Intragroup Financing Health Check — Client Intake</h1>
+    <p>Pre-session intake for the 90-minute Health Check Assessment <span class="ref">(RM3,888 incl. 8% SST)</span> — limited to <strong>one lender entity</strong> per session. List every borrower under that lender below.</p>
   </div>
 
-  <div class="cards">
-    <a class="card" href="Health_Check_Roadmap.html">
-      <div class="icon">🗺</div>
-      <div class="body">
-        <h2>Start here — Health Check Roadmap</h2>
-        <p>A short walkthrough of what to prepare before the session, what happens during it, and what you'll receive afterward.</p>
-      </div>
-    </a>
-    <a class="card" href="01_Client_Intake_Questionnaire.html">
-      <div class="icon">📝</div>
-      <div class="body">
-        <h2>Client Intake Questionnaire</h2>
-        <p>Please complete this before your session — captures your group structure, borrowings, and loan facts.</p>
-      </div>
-    </a>
-    <a class="card" href="01A_Advances_Movement_Schedule.xlsx">
-      <div class="icon">📊</div>
-      <div class="body">
-        <h2>Advances Movement Schedule (Excel)</h2>
-        <p>Please have your finance team complete this alongside the intake — opening balances, additions, and repayments for each borrower.</p>
-      </div>
-    </a>
-    <a class="card" href="06_Health_Check_Summary.html">
-      <div class="icon">✅</div>
-      <div class="body">
-        <h2>Health Check Summary</h2>
-        <p>Your session findings and recommendations — this link is shared with you after the session.</p>
-      </div>
-    </a>
+  <div class="meta">
+    <div class="full"><label>Client / lender name <span style="font-weight:400;text-transform:none;letter-spacing:0">(one per session)</span></label><input type="text" id="lenderName" placeholder="e.g. ABC Sdn Bhd"></div>
+    <div><label>YA</label><input type="text"></div>
+    <div><label>Contact person</label><input type="text"></div>
+    <div class="full" style="grid-column:span 2"><label>Prepared by / date</label><input type="text"></div>
   </div>
 
-  <p class="footnote">Questions at any point? Just reply to your onboarding email — we're happy to help.</p>
+  <div class="howto">Please complete the 8 <strong>essential</strong> questions below (marked <span class="esstag">Essential</span>) so we can book, scope, and prepare for your session. Everything else is optional — skip anything you don't have to hand; we'll cover it with you live in the 90-minute session instead.</div>
+
+  <div class="progwrap">
+    <div class="progbar"><div class="fill" id="fill"></div></div>
+    <div class="proglbl" id="prog">0 / 0 essential answered</div>
+  </div>
+  <div class="subnote" id="optNote" style="margin:0 28px 12px"></div>
+
+  <div class="sectionhd">About the lender</div>
+  <div class="qlist">
+    <div class="qunit essential">
+      <div class="qhead"><span class="qno">A</span><span class="qtitle">Is money-lending part of the lender's ordinary business?</span><span class="esstag">Essential</span></div>
+      <p class="qdesc">This tells us how the interest is taxed and whether a simplified interest rate can be used, so we don't need to ask separately.</p>
+      <div class="qbody">
+        <div class="choices" data-track>
+          <label><input type="radio" name="q_bizmode" value="business">Ordinary business — lender lends money as part of its trade</label>
+          <label><input type="radio" name="q_bizmode" value="passive">One-off / passive advance — not the lender's trade</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qunit essential">
+      <div class="qhead"><span class="qno">B</span><span class="qtitle">Aggregate intra-group loan balance for the YA</span><span class="esstag">Essential</span></div>
+      <p class="qdesc">Estimated total of ALL intercompany advances given by this lender, across every borrower listed below.</p>
+      <div class="qbody">
+        <div class="field"><input type="text" id="aggInput" placeholder="Official aggregate for the YA (RM)" data-track></div>
+        <div class="subnote" id="autoSum">Auto total of RM-denominated borrowers below: RM 0</div>
+      </div>
+    </div>
+
+    <div class="qunit essential">
+      <div class="qhead"><span class="qno">C</span><span class="qtitle">Does the lender have any external bank borrowings?</span><span class="esstag">Essential</span></div>
+      <p class="qdesc">e.g. term loans, overdrafts, trade financing — affects whether loans to related companies come from the lender's own funds.</p>
+      <div class="qbody">
+        <div class="choices" data-track>
+          <label><input type="radio" name="q_extborrow" value="yes">Yes</label>
+          <label><input type="radio" name="q_extborrow" value="no">No</label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sectionhd">Borrower &amp; loan details</div>
+  <div class="bwrap" id="borrowers"></div>
+  <div class="bwrap" style="padding-top:0">
+    <button type="button" class="addBtn" onclick="addBorrower()">+ Add another borrower</button>
+  </div>
+
+  <div class="nextsteps">
+    <strong>What happens next</strong>
+    <p style="margin:8px 0 0;font-size:12px;color:var(--muted)">Once this intake and your Advances Movement Schedule are in, our consultant reviews both to prepare for your session — no further action needed from you until the scheduled call. You'll receive a Health Check Summary with the session's findings and recommendations afterward.</p>
+  </div>
+
+  <p class="note">This Health Check is based on what you tell us here — we don't independently review your loan agreements or board resolutions at this stage. Please answer based on the real facts, not just the label on any agreement. This form doesn't decide your tax position by itself; it sets up the assessment during your session.</p>
+
+  <div class="signrow">
+    <div class="sign">Prepared by</div>
+    <div class="sign">Reviewed by</div>
+    <div class="sign">Date</div>
+  </div>
+
+  <div class="toolbar">
+    <button class="btn ghost" type="button" onclick="resetAll()">Reset</button>
+    <button class="btn primary" type="button" onclick="window.print()">Print / Save PDF</button>
+  </div>
 </div>
+
+<script>
+let borrowerSeq = 0;
+
+function borrowerTemplate(id){
+  return `
+    <div class="bhead">
+      <span class="bnum"></span>
+      <input type="text" class="bname" placeholder="Borrower name" data-track>
+      <button type="button" class="removeBtn" onclick="removeBorrower(${id})">Remove</button>
+    </div>
+    <div class="subq essential">
+      <div class="slabel"><span class="sltr">a</span>Relationship to lender<span class="esstag">Essential</span></div>
+      <div class="sdesc">e.g. subsidiary, common shareholder, common director.</div>
+      <div class="qbody"><div class="field"><input type="text" placeholder="e.g. 100%-owned subsidiary of the lender" data-track></div></div>
+    </div>
+    <div class="subq essential">
+      <div class="slabel"><span class="sltr">b</span>Nature of balance &amp; Aging<span class="esstag">Essential</span></div>
+      <div class="sdesc">Trade = normal trading credit. Non-trade = cash advance or loan. For Trade balances, aging is critical — LHDN routinely reclassifies trade balances left outstanding well beyond normal terms as loans.</div>
+      <div class="qbody">
+        <div class="choices" data-track>
+          <label><input type="radio" name="q_nature_${id}" value="trade">Trade</label>
+          <label><input type="radio" name="q_nature_${id}" value="nontrade">Non-trade</label>
+          <label><input type="radio" name="q_nature_${id}" value="mixed">Partly both</label>
+        </div>
+        <div class="field" style="margin-top:6px;"><input type="text" placeholder="If Trade, what is the standard credit term? Are any balances older than this (e.g., > 1 year)?" data-track></div>
+      </div>
+    </div>
+    <div class="subq essential">
+      <div class="slabel"><span class="sltr">c</span>Residency &amp; loan corridor<span class="esstag">Essential</span></div>
+      <div class="sdesc">Is the borrower based in Malaysia or overseas?</div>
+      <div class="qbody">
+        <div class="field"><input type="text" placeholder="Borrower's country of tax residence" data-track></div>
+        <div class="choices" data-track>
+          <label><input type="radio" name="q_corridor_${id}" value="domestic">Domestic — both Malaysia resident</label>
+          <label><input type="radio" name="q_corridor_${id}" value="cross">Cross-border</label>
+        </div>
+      </div>
+    </div>
+    <div class="subq essential">
+      <div class="slabel"><span class="sltr">d</span>Principal &amp; currency<span class="esstag">Essential</span></div>
+      <div class="sdesc">Amount and currency of this loan or advance.</div>
+      <div class="qbody">
+        <div class="field-row">
+          <div class="field"><input type="text" class="principalInput" placeholder="Principal amount" data-track></div>
+          <div class="field"><input type="text" class="currencyInput" placeholder="Currency (e.g. RM, USD)" data-track></div>
+        </div>
+      </div>
+    </div>
+    <div class="subq essential">
+      <div class="slabel"><span class="sltr">e</span>Interest terms<span class="esstag">Essential</span></div>
+      <div class="sdesc">Rate actually charged, if any.</div>
+      <div class="qbody">
+        <div class="choices" data-track>
+          <label><input type="radio" name="q_interest_${id}" value="nil">Nil / interest-free</label>
+          <label><input type="radio" name="q_interest_${id}" value="below">Below market</label>
+          <label><input type="radio" name="q_interest_${id}" value="market">At market rate</label>
+        </div>
+        <div class="field"><input type="text" placeholder="Rate charged, if any (e.g. 2% p.a.)"></div>
+      </div>
+    </div>
+    <p class="subnote">Whether any of these are director loans is reviewed with you live using the Decision Tree — not asked here.</p>
+
+    <details class="moredetail">
+      <summary>More detail (optional)</summary>
+      <div class="subq">
+        <div class="slabel"><span class="sltr">f</span>Source of funds</div>
+        <div class="sdesc">Your own money, or funds you yourself borrowed to re-lend?</div>
+        <div class="qbody">
+          <div class="choices" data-track>
+            <label><input type="radio" name="q_source_${id}" value="internal">Our own internal funds</label>
+            <label><input type="radio" name="q_source_${id}" value="onlent">Borrowed elsewhere and passed on</label>
+          </div>
+        </div>
+      </div>
+      <div class="subq">
+        <div class="slabel"><span class="sltr">g</span>Documentation</div>
+        <div class="sdesc">What's actually in place, if anything.</div>
+        <div class="qbody">
+          <div class="checks" data-track>
+            <label><input type="checkbox">Written loan agreement exists</label>
+            <label><input type="checkbox">Repayment obligation stated</label>
+            <label><input type="checkbox">Fixed maturity date stated</label>
+            <label><input type="checkbox">Interest rate stated</label>
+            <label><input type="checkbox">Security or covenants required</label>
+          </div>
+        </div>
+      </div>
+      <div class="subq">
+        <div class="slabel"><span class="sltr">h</span>Accounts classification</div>
+        <div class="sdesc">How this balance is shown in your financial statements.</div>
+        <div class="qbody">
+          <div class="choices" data-track>
+            <label><input type="radio" name="q_class_${id}" value="liability">Classified as liability (loan)</label>
+            <label><input type="radio" name="q_class_${id}" value="equity">Classified as equity</label>
+            <label><input type="radio" name="q_class_${id}" value="unsure">Not sure</label>
+          </div>
+        </div>
+      </div>
+    </details>
+  `;
+}
+
+function addBorrower(){
+  borrowerSeq++;
+  const id = borrowerSeq;
+  const card = document.createElement('div');
+  card.className = 'bcard';
+  card.dataset.borrower = id;
+  card.innerHTML = borrowerTemplate(id);
+  document.getElementById('borrowers').appendChild(card);
+  renumberBorrowers();
+  tally();
+}
+function removeBorrower(id){
+  const card = document.querySelector('.bcard[data-borrower="'+id+'"]');
+  if (card) card.remove();
+  renumberBorrowers();
+  tally();
+}
+function renumberBorrowers(){
+  const cards = document.querySelectorAll('.bcard');
+  const onlyOne = cards.length <= 1;
+  cards.forEach((c,i) => {
+    c.querySelector('.bnum').textContent = i + 1;
+    const btn = c.querySelector('.removeBtn');
+    btn.disabled = onlyOne;
+  });
+}
+
+function isAnswered(unit){
+  const texts = unit.querySelectorAll('.qbody input[type=text][data-track]');
+  for (const t of texts){ if (t.value.trim() !== '') return true; }
+  const groups = unit.querySelectorAll('.qbody .choices[data-track], .qbody .checks[data-track]');
+  for (const g of groups){ if (g.querySelector('input:checked')) return true; }
+  return false;
+}
+function updateAggregate(){
+  let sum = 0;
+  document.querySelectorAll('.bcard').forEach(card => {
+    const currency = (card.querySelector('.currencyInput')?.value || '').trim().toLowerCase();
+    if (currency === 'rm' || currency === 'myr' || currency === 'ringgit'){
+      const raw = (card.querySelector('.principalInput')?.value || '').replace(/[^0-9.]/g,'');
+      const n = parseFloat(raw);
+      if (!isNaN(n)) sum += n;
+    }
+  });
+  document.getElementById('autoSum').textContent = 'Auto total of RM-denominated borrowers below: RM ' + sum.toLocaleString();
+}
+function tally(){
+  updateAggregate();
+  const essentialUnits = document.querySelectorAll('.qunit.essential, .subq.essential');
+  const allUnits = document.querySelectorAll('.qunit, .subq');
+  let essentialAnswered = 0;
+  essentialUnits.forEach(u => { if (isAnswered(u)) essentialAnswered++; });
+  let totalAnswered = 0;
+  allUnits.forEach(u => { if (isAnswered(u)) totalAnswered++; });
+  const optionalAnswered = totalAnswered - essentialAnswered;
+  document.getElementById('prog').textContent = essentialAnswered + ' / ' + essentialUnits.length + ' essential answered';
+  document.getElementById('fill').style.width = (essentialUnits.length ? (essentialAnswered / essentialUnits.length * 100) : 0) + '%';
+  const optEl = document.getElementById('optNote');
+  if (optEl) optEl.textContent = optionalAnswered > 0 ? ('+ ' + optionalAnswered + ' optional detail' + (optionalAnswered === 1 ? '' : 's') + ' also provided') : '';
+}
+document.addEventListener('input', e => { if (e.target.closest('.qunit, .bcard')) tally(); });
+document.addEventListener('change', e => { if (e.target.closest('.qunit, .bcard')) tally(); });
+
+function resetAll(){
+  document.querySelectorAll('.meta input').forEach(i => i.value = '');
+  document.getElementById('borrowers').innerHTML = '';
+  borrowerSeq = 0;
+  addBorrower();
+  document.querySelectorAll('.qunit input[type=text]').forEach(i => i.value = '');
+  document.querySelectorAll('.qunit input[type=radio]').forEach(r => r.checked = false);
+  tally();
+}
+
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('details.moredetail').forEach(d => { d.dataset.wasOpen = d.open ? '1' : '0'; d.open = true; });
+});
+window.addEventListener('afterprint', () => {
+  document.querySelectorAll('details.moredetail').forEach(d => { d.open = d.dataset.wasOpen === '1'; });
+});
+
+addBorrower();
+tally();
+</script>
