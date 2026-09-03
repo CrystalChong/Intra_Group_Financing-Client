@@ -1,0 +1,178 @@
+<title>Health Check Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Lato:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#FFFFFF;
+  --ink:#102127;
+  --muted:#42565E;
+  --soft:#7C8B92;
+  --navy:#0F4C5C;
+  --navy-deep:#08303B;
+  --grad-navy:linear-gradient(135deg,#0F4C5C 0%,#08303B 100%);
+  --sky:#1CACE1;
+  --sky-soft:#E8F6FC;
+  --line:#E7EDEF;
+  --gold:#D6B25E;
+  --warn-bg:#F8F1DF;
+  --good:#177A56;
+  --good-bg:#E6F4EE;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:#EEF2F5;
+  color:var(--ink);
+  font-family:"Lato",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:13px;line-height:1.5;
+}
+.page{max-width:760px;margin:24px auto;padding:0 0 32px}
+.hero{
+  background:var(--grad-navy);padding:28px 30px 24px;color:#fff;
+  border-radius:14px;box-shadow:0 14px 34px rgba(15,76,92,.12);
+}
+.hero .badge{
+  display:inline-block;font-family:"Poppins",sans-serif;font-weight:600;font-size:10px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--navy-deep);
+  background:var(--gold);padding:3px 11px;border-radius:100px;margin-bottom:8px;
+}
+.hero h1{font-family:"Poppins",sans-serif;font-weight:700;font-size:24px;margin:0 0 6px;line-height:1.2}
+.hero p{margin:0;font-size:12.5px;color:rgba(255,255,255,.85);max-width:58ch}
+.hero .ref{font-family:"IBM Plex Mono",monospace;color:#16C0E8}
+
+.stagehd{
+  margin:30px 4px 6px;display:flex;align-items:baseline;gap:10px;
+}
+.stagehd .stagenum{
+  font-family:"Poppins",sans-serif;font-weight:700;font-size:11px;color:#fff;
+  background:var(--navy);padding:3px 12px;border-radius:100px;letter-spacing:.04em;text-transform:uppercase;
+}
+.stagehd h2{font-family:"Poppins",sans-serif;font-weight:700;font-size:17px;margin:0;color:var(--navy)}
+.stagenote{margin:0 4px 14px;font-size:12px;color:var(--muted)}
+
+.itemlist{display:flex;flex-direction:column;gap:10px}
+.item{
+  background:var(--paper);border:1px solid var(--line);border-radius:14px;
+  padding:14px 16px;display:flex;gap:14px;align-items:flex-start;
+  box-shadow:0 1px 3px rgba(0,0,0,.04);
+}
+.item .icon{
+  font-family:"Poppins",sans-serif;font-weight:700;font-size:14px;color:#fff;
+  background:var(--sky);width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.item.done .icon{background:var(--good)}
+.item .body{flex:1}
+.item h3{font-family:"Poppins",sans-serif;font-weight:600;font-size:13.5px;margin:0 0 3px;color:var(--navy)}
+.item p{margin:0 0 6px;font-size:12px;color:var(--muted)}
+.item p:last-child{margin-bottom:0}
+.item a.link{
+  display:inline-flex;align-items:center;gap:5px;font-family:"Poppins",sans-serif;font-weight:600;
+  font-size:11.5px;color:var(--navy);text-decoration:none;border-bottom:1px solid var(--gold);
+}
+.item a.link:hover{color:var(--sky)}
+.item .filetag{font-family:"IBM Plex Mono",monospace;font-size:9.5px;color:var(--soft);display:block;margin-top:4px}
+
+.session-item{opacity:.92}
+.session-item .icon{background:var(--gold);color:var(--navy-deep)}
+
+.deadline{
+  margin:16px 4px 0;padding:11px 15px;border-radius:12px;
+  background:var(--warn-bg);border:1px solid var(--gold);font-size:12px;color:#8F702B;
+}
+.deadline strong{font-family:"Poppins",sans-serif;color:var(--navy)}
+
+.footnote{margin:24px 4px 0;font-size:11px;color:var(--soft)}
+.footnote a{color:var(--navy)}
+
+@media print{
+  body{background:#fff}
+  .page{max-width:none;margin:0}
+}
+</style>
+
+<div class="page">
+  <div class="hero">
+    <span class="badge">YYC Tax Advisory</span>
+    <h1>Health Check Roadmap</h1>
+    <p>A walkthrough of how your Intragroup Financing Health Check <span class="ref">(RM3,888 incl. 8% SST)</span> actually runs — what we need from you before the session, what happens during the 90 minutes, and what you'll walk away with.</p>
+  </div>
+
+  <div class="stagehd"><span class="stagenum">Before your session</span><h2>What we need from you</h2></div>
+  <p class="stagenote">Please return all three items at least 48 hours before your scheduled session, so we can prepare properly.</p>
+  <div class="itemlist">
+    <div class="item">
+      <div class="icon">1</div>
+      <div class="body">
+        <h3>Advances Movement Schedule</h3>
+        <p>Your finance team populates this with opening balances, additions, settlements, and funding sources for every borrower under this lender, across YA 2023–2025.</p>
+        <a class="link" href="01A_Advances_Movement_Schedule.xlsx">Download the Excel template →</a>
+        <span class="filetag">01A_Advances_Movement_Schedule.xlsx</span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="icon">2</div>
+      <div class="body">
+        <h3>Group Structure / Shareholding Chart</h3>
+        <p>Your latest group organisational chart, so we can map the related-party relationships (subsidiaries, sister companies) and confirm the Transfer Pricing scope under s.140A. Please attach this directly to your reply email — there's no upload field for it here, since this page carries no file storage of its own.</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="icon">3</div>
+      <div class="body">
+        <h3>Online Diagnostic Intake</h3>
+        <p>Answer the essential screening questions about the lender and its borrowers, then click <strong>Print / Save PDF</strong> at the bottom of the page and attach the exported PDF to your reply email.</p>
+        <a class="link" href="01_Client_Intake_Questionnaire.html">Open the intake questionnaire →</a>
+        <span class="filetag">01_Client_Intake_Questionnaire.html</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="deadline"><strong>Submission deadline:</strong> reply to your onboarding email with all three items attached — the Excel schedule, the group structure chart, and your exported intake PDF — at least 48 hours before the session.</div>
+
+  <div class="stagehd"><span class="stagenum">During your session</span><h2>What we work through together</h2></div>
+  <p class="stagenote">These are run live by your consultant using what you've submitted — nothing further is needed from you here.</p>
+  <div class="itemlist">
+    <div class="item session-item">
+      <div class="icon">4</div>
+      <div class="body">
+        <h3>Intra-Group Loan Decision Tree</h3>
+        <p>Walks each borrower's facts through the Transfer Pricing scope, trade vs non-trade, and debt-vs-equity questions.</p>
+      </div>
+    </div>
+    <div class="item session-item">
+      <div class="icon">5</div>
+      <div class="body">
+        <h3>Loan vs Equity Scorecard</h3>
+        <p>A detailed, criteria-by-criteria score if a borrower's debt/equity character is ambiguous.</p>
+      </div>
+    </div>
+    <div class="item session-item">
+      <div class="icon">6</div>
+      <div class="body">
+        <h3>Simplified Method Scorecard</h3>
+        <p>Checks whether each borrower qualifies for the BNM-published FD Rate or ALR, instead of a full benchmarking study.</p>
+      </div>
+    </div>
+    <div class="item session-item">
+      <div class="icon">7</div>
+      <div class="body">
+        <h3>Financial Impact Study</h3>
+        <p>Quantifies the illustrative deemed interest income and surcharge exposure using indicative market rates.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stagehd"><span class="stagenum">After your session</span><h2>What you walk away with</h2></div>
+  <div class="itemlist">
+    <div class="item done">
+      <div class="icon">8</div>
+      <div class="body">
+        <h3>Health Check Summary</h3>
+        <p>A consolidated High/Medium/Low risk matrix and a clear recommendation on whether a full Impact Study and formal TP benchmarking is needed next.</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="footnote">Questions while compiling your figures? Just reply to your onboarding email — we're happy to help. See the <a href="index.html">overview page</a> for links to everything.</p>
+</div>
